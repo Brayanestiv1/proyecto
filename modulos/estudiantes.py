@@ -2,11 +2,31 @@ import json
 import os
 
 def registrar_estudiante():
+    print('\033c')
     # Solicitar datos del estudiante
-    codigo = input("Ingrese el código del estudiante: ")
-    nombre = input("Ingrese el nombre del estudiante: ")
-    sexo = input("Ingrese el sexo del estudiante (M/F): ")
+
+    #Validacion de nombre
     
+    while True:
+        try:
+            codigo = int(input("Ingrese el código del estudiante: "))
+            if codigo <= 0:
+                print("El codigo debe ser un número positivo.")
+                continue
+            break
+        except ValueError:
+            print('\033c')
+            print(">>> Error. Por favor, ingrese un número válido para el codigo.")
+        
+    nombre = input("Ingrese el nombre del estudiante: ")
+    if codigo != str:
+        print(">>> Error. El dato ingresado es invalido.")
+        input("Presione enter para volver a ingresar el dato requerido.")
+
+    sexo = input("Ingrese el sexo del estudiante (M/F): ")
+    if codigo != str:
+        print(">>> Error. El dato ingresado es invalido.")
+        input("Presione enter para volver a ingresar el dato requerido.")
 
     #Validacion de edad
     while True:
