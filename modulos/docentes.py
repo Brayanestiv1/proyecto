@@ -1,33 +1,26 @@
-import json
-import os
+def registrar_docente():
+    # Solicitar datos del docente
+    cedula = input("Ingrese la cédula del docente: ")
+    nombre = input("Ingrese el nombre del docente: ")
 
-def lenCedula():
-    while True:
-        os.system('cls' if os.name == 'nt' else 'clear')
-        cedula = input("Ingrese la cédula del docente (10 dígitos): ")
-        
-        if len(cedula) == 10 and cedula.isdigit():
-            return int(cedula)  # Retorna la cédula válida
-        else:
-            os.system('cls' if os.name == 'nt' else 'clear')  # Limpia la pantalla
-            if not cedula.isdigit():
-                print(">>> Error. Debe ingresar un número.")
-                input("Presione cualquier tecla para volver a ingresar...")
-            else:
-                os.system('cls' if os.name == 'nt' else 'clear')  # Limpia la pantalla
-                print("La cédula debe tener exactamente 10 dígitos y contener solo números.")
-                input("Presione cualquier tecla para volver a ingresar...")
-            
-docentes = {
-    "nombre" : input("Ingrese un nombre: "),
-    "cedula" : lenCedula()
-   # "materia" : lenMateria()
-}
+    # Crear el diccionario del docente
+    docente = {
+        'cedula': cedula,
+        'nombre': nombre
+    }
 
-# Guardar en un archivo JSON
-with open("proyecto/data/docentes.json", "w") as fd:
-    json.dump(docentes, fd)
+    # Intentar cargar los docentes existentes
+    try:
+        with open('data/docentes.json', 'r') as archivo:
+            docentes = json.load(archivo)
+    except FileNotFoundError:
+        docentes = []
 
+    # Agregar el nuevo docente a la lista
+    docentes.append(docente)
 
-print("Dato guardado correctamente.")
+    # Guardar la lista de docentes en el archivo
+    with open('data/docentes.json', 'w') as archivo:
+        json.dump(docentes, archivo, indent=4)
+    print("Docente registrado correctamente.")
 
