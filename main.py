@@ -1,11 +1,14 @@
-
+from long import long
+from menu import menu
+from modulos import asig_estudiante_grup_modul,asistencia,consultas_generacion_informes,docentes,estudiantes,modulos,registro_asistencia,registro_grupos
 while True:
-    
+    long
+    menu
     while True:
         op = menu()
         match op:
             case 1:
-                registroDeGrupos()
+                registro_grupos
             case 2:
                 registroDeModulos()
             case 3:

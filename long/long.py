@@ -1,6 +1,6 @@
 import hashlib
 import json
-
+from menu import menu
 # Función para encriptar la contraseña
 def encriptar_contraseña(contraseña):
     return hashlib.sha256(contraseña.encode()).hexdigest()
@@ -28,3 +28,4 @@ def iniciar_sesion():
         print("Acceso concedido")
     else:
         print("Contraseña incorrecta")
+
