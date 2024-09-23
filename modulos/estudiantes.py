@@ -18,10 +18,10 @@ def lenCedula():
                 print("La cédula debe tener exactamente 10 dígitos y contener solo números.")
                 input("Presione cualquier tecla para volver a ingresar...")
             
-docentes = {
+estudiantes = {
     "nombre" : input("Ingrese un nombre: "),
     "cedula" : lenCedula()
-    "materia" : lenMateria()
+   # "materia" : lenMateria()
 }
 
 # Guardar en un archivo JSON
@@ -30,4 +30,3 @@ with open("modulos/Docentes/docentes.json", "w") as fd:
 
 
 print("Dato guardado correctamente.")
-

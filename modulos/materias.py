@@ -47,7 +47,7 @@ materias = {
     "bachillerato":matBachillerato
 }
 # Guardar en un archivo JSON
-with open("modulos/materias/materias.json", "w", encoding="utf-8") as fd:
+with open("proyecto/materias.json", "w", encoding="utf-8") as fd:
     json.dump(materias, fd, ensure_ascii=False)
 
 

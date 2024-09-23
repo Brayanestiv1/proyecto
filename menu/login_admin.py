@@ -1,15 +1,3 @@
-import subprocess
-import platform
-
-"""1. Inicio de Sesión: 
-Al iniciar el programa, debe solicitarse un nombre de usuario y contraseña. 
-La primera vez que el sistema sea ejecutado, la contraseña será la predefinida: "SISGESA"""
-def limpiar_pantalla():
-    if platform.system() == "Windows":
-        subprocess.call("cls", shell=True)
-    else:
-        subprocess.call("clear", shell=True)
-
 
 contr = "SISGESA"
 
@@ -28,12 +16,10 @@ def valContr():
             limpiar_pantalla()
         
 
-"""2. Menú de Opciones:
-El programa debe presentar un menú con opciones claras para interactuar con 
-el sistema."""
+
 def menu():
     while True:
-        limpiar_pantalla()
+        print('\033c')
         print("        ** MENU **")
         print(" 1. Registro de grupos.")
         print(" 2. Registro de módulos.")
@@ -54,6 +40,7 @@ def menu():
             print(f"Has seleccionado la opción {opcion}.")
             input("Presiona cualquier tecla para continuar...")
         else:
+            limpiar_pantalla()
             print("Opción no válida. Intente de nuevo.")
             input("Presiona cualquier tecla para continuar...")
         
