@@ -1,10 +1,10 @@
 import json
-
+import os
 def registrar_modulo():
     # Solicitar datos al usuario
-    codigo = input("Ingrese el código del módulo: ")
-    nombre = input("Ingrese el nombre del módulo: ")
-    duracion = input("Ingrese la duración del módulo en semanas: ")
+    codigo = int(input("Ingrese el código del módulo: "))
+    nombre = str(input("Ingrese el nombre del módulo: "))
+    duracion = int(input("Ingrese la duración del módulo en semanas: "))
 
     # Crear el diccionario del módulo
     modulo = {
@@ -24,9 +24,13 @@ def registrar_modulo():
     modulos.append(modulo)
 
     # Guardar la lista de módulos actualizada en el archivo
-    with open('proyecto/data/modulos.json', 'w') as archivo:
-        json.dump(modulos, archivo, indent=4)  # Formato JSON con indentación
-    print("Módulo registrado correctamente.")
+    try:
+        with open('proyecto/data/modulos.json', 'w') as archivo:
+            json.dump(modulos, archivo, indent=4)  # Formato JSON con indentación
+        print("Módulo registrado correctamente.")
+    except (FileNotFoundError, json.JSONDecodeError):
+        # Crear la carpeta si no existe
+        os.makedirs("data", exist_ok=True)
 
 
 def listar_modulos():
