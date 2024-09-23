@@ -9,29 +9,50 @@ def registrar_estudiante():
     
     while True:
         try:
-            codigo = int(input("Ingrese el código del estudiante: "))
-            if codigo <= 0:
-                print("El codigo debe ser un número positivo.")
-                continue
-            break
-        except ValueError:
             print('\033c')
-            print(">>> Error. Por favor, ingrese un número válido para el codigo.")
-        
-    nombre = input("Ingrese el nombre del estudiante: ")
-    if codigo != str:
-        print(">>> Error. El dato ingresado es invalido.")
-        input("Presione enter para volver a ingresar el dato requerido.")
+            codigo = int(input("---> Ingrese el código del estudiante: "))
+            if codigo <= 0:
+                print("El código debe ser un número positivo.")
+            else:
+                break  # Si es un número positivo, salimos del bucle
+        except ValueError:
+            print('\033c')  # Limpia la consola
+            print(">>> Error. Por favor, ingrese un número válido para el código.")
+            input("Presione enter para volver a intentar. . . ")
+            print('\033')
 
-    sexo = input("Ingrese el sexo del estudiante (M/F): ")
-    if codigo != str:
-        print(">>> Error. El dato ingresado es invalido.")
-        input("Presione enter para volver a ingresar el dato requerido.")
+    while True:
+        try:
+            print('\033c')
+            nombre = str(input("---> Ingrese el código del estudiante: "))
+            if nombre == int:
+                print("El nombre no puede contener numeros.")
+            else:
+                break  # Si el nombre esta bien, salimos del bucle
+        except ValueError:
+            print('\033c')  # Limpia la consola
+            print(">>> Error. Por favor, ingrese un nombre válido.")
+            input("Presione enter para volver a intentar. . . ")
+            print('\033')
+
+    while True:
+        try:
+            print('\033c')
+            sexo = str(input("---> Ingrese el genero del estudiante (M/F): "))
+            if nombre == "M" or nombre == "m" or nombre == "F" or nombre == "f":
+                print("")
+            else:
+                break  # Si el genero esta bien, salimos del bucle
+        except ValueError:
+            print('\033c')  # Limpia la consola
+            print(">>> Error. Por favor, ingrese un genero válido.")
+            input("Presione enter para volver a intentar. . . ")
+            print('\033')
 
     #Validacion de edad
     while True:
         try:
-            edad = int(input("Ingrese la edad del estudiante: "))
+            edad = int(input("---> Ingrese la edad del estudiante: "))
             if edad <= 0:
                 print("La edad debe ser un número positivo.")
                 continue

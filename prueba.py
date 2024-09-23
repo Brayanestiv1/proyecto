@@ -55,6 +55,8 @@ def registrar_estudiante():
 
     estudiantes.append(estudiante)
 
+    # Guardar la lista de estudiantes en el archivo
+    
     with open('data/estudiantes.json', 'w') as archivo:
         json.dump(estudiantes, archivo, indent=4)
     print("Estudiante registrado correctamente.")
