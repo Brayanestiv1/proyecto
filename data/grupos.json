@@ -1,12 +1,7 @@
 [
     {
-        "codigo": "132",
-        "nombre": "grupo1",
-        "sigla": "G1"
-    },
-    {
-        "codigo": "4",
-        "nombre": "grupo4",
-        "sigla": "G4"
+        "codigo": "6",
+        "nombre": "sexto",
+        "sigla": "S6"
     }
 ]

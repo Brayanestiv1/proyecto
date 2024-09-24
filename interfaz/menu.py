@@ -9,12 +9,11 @@ def mostrar_menu():
     print("                [2] Registro de módulos              ")
     print("                [3] Registro de estudiantes           ")
     print("                [4] Registro de docentes             ")
-    print("                [5] Asignar estudiantes a grupos     ")
-    print("                [6] Registrar asistencia              ")
-    print("                [7] Consultas                         ")
-    print("                [8] Generación de informes            ")
-    print("                [9] Cambio de contraseña              ")
-    print("               [10] Salir                             ")
+    print("                [5] Registrar asistencia              ")
+    print("                [6] Consultas                         ")
+    print("                [7] Generación de informes            ")
+    print("                [8] Cambio de contraseña              ")
+    print("                [9] Salir                             ")
     print("="*60)
 
         

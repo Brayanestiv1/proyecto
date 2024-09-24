@@ -14,7 +14,7 @@ def iniciar_sesion():
         print("            📚 INICIO DE SESIÓN 📚            ")
         print("="*60)
 
-        usuario = input("Ingrese su usuario: ").strip()
+        usuario = input("---> Ingrese su usuario: ").strip()
 
         # Validar que el nombre no contenga números
         if any(char.isdigit() for char in usuario):
@@ -24,7 +24,7 @@ def iniciar_sesion():
 
         while True:
             contraseña_guardada = cargar_contraseña()
-            contraseña = input("Ingrese la contraseña: ").strip()
+            contraseña = input("---> Ingrese la contraseña: ").strip()
             error_msg = ""
 
             if encriptar_contraseña(contraseña) == contraseña_guardada:
@@ -33,9 +33,7 @@ def iniciar_sesion():
                 os.system("clear")  # Limpiar la consola después de ingresar
                 return  # Salir de la función para mostrar el menú
             else:
-                error_msg = ">>> ❌ Error. Contraseña incorrecta."
-                print("\r" + " " * len(error_msg) + "\r", end="")  # Limpiar mensaje anterior
-                print(error_msg)  # Imprimir mensaje de error
+                print(">>> ❌ Error. Contraseña incorrecta.")
                 input("Presione enter para intentar de nuevo...")
 
 # Función para cargar la contraseña del archivo JSON

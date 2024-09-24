@@ -1,43 +1,7 @@
 [
     {
-        "codigo": "ASDAS",
-        "nombre": "ASDSA",
-        "sexo": "M",
-        "edad": 12
-    },
-    {
-        "codigo": 123,
-        "nombre": "1",
-        "sexo": "M",
-        "edad": 12
-    },
-    {
         "codigo": 1,
-        "nombre": "1",
-        "sexo": "M",
-        "edad": 13
-    },
-    {
-        "codigo": 1,
-        "nombre": "1",
-        "sexo": "m",
-        "edad": 12
-    },
-    {
-        "codigo": 1,
-        "nombre": "123",
-        "sexo": "m",
-        "edad": 15
-    },
-    {
-        "codigo": 123,
-        "nombre": "12",
-        "sexo": "f",
-        "edad": 15
-    },
-    {
-        "codigo": 123,
-        "nombre": "123",
+        "nombre": "Juan",
         "sexo": "m",
         "edad": 18
     }

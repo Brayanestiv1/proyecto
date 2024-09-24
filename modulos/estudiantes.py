@@ -1,90 +1,103 @@
 import json
 import os
 
+def mostrar_menu_registro_estudiantes():
+    os.system('clear' if os.name != 'nt' else 'cls')
+    print("=" * 40)
+    print("      📚 Registro de Estudiantes 📚      ")
+    print("=" * 40)
+    print("1. Ingresar Código del Estudiante")
+    print("2. Ingresar Nombre del Estudiante")
+    print("3. Ingresar Género del Estudiante (M/F)")
+    print("4. Ingresar Edad del Estudiante")
+    print("5. Guardar Estudiante")
+    print("6. Volver al Menú Principal")
+    print("=" * 40)
+
 def registrar_estudiante():
-    print('\033c')
-    print("="*40)
-    print("      --- Registro de Estudiante ---      ")
-    print("="*40)
+    estudiantes = []
 
-#Validacion de codigo
-    while True:
-        try:
-            print('\033c')
-            codigo = int(input("---> Ingrese el código del estudiante: "))
-            if codigo <= 0:
-                print("El código debe ser un número positivo.")
-            else:
-                break  # Si es un número positivo, salimos del bucle
-        except ValueError:
-            print('\033c')  # Limpia la consola
-            print(">>> Error. Por favor, ingrese un número válido para el código.")
-            input("Presione enter para volver a intentar. . . ")
-            print('\033')
-#Validacion de nombre
-    while True:
-        try:
-            print('\033c')
-            nombre = str(input("---> Ingrese el nombre del estudiante: "))
-            if nombre == int:
-                print("El nombre no puede contener numeros.")
-            else:
-                break  # Si el nombre esta bien, salimos del bucle
-        except ValueError:
-            print('\033c')  # Limpia la consola
-            print(">>> Error. Por favor, ingrese un nombre válido.")
-            input("Presione enter para volver a intentar. . . ")
-            print('\033')
-#Validacion de genero
-    while True:
-        print('\033c')
-        sexo = str(input("---> Ingrese el genero del estudiante (M/F): ")).strip().lower()
-        if sexo in ["m", "f"]:
-            break
-        else:
-            print('\033c')  # Limpia la consola
-            print(">>> Error. Por favor, ingrese 'M' o 'F'.")
-            input("Presione enter para volver a intentar. . . ")
-            print('\033')
-
-#Validacion de edad
-    while True:
-        try:
-            edad = int(input("---> Ingrese la edad del estudiante: "))
-            if edad <= 0:
-                print("La edad debe ser un número positivo.")
-            else:
-                break
-        except ValueError:
-            print(">>> Error. Por favor, ingrese un número válido para la edad.")
-            print("Por favor, ingrese un número válido para la edad.")
-
-
-# Crear el diccionario del estudiante
-    estudiante = {
-            "codigo": codigo,
-            "nombre": nombre,
-            "sexo": sexo,
-            "edad": edad
-        }
-
-    # Intentar cargar los estudiantes existentes
+    # Intentar cargar estudiantes existentes
     try:
         with open("data/estudiantes.json", "r") as archivo:
             estudiantes = json.load(archivo)
-    except FileNotFoundError:
+    except (FileNotFoundError, json.JSONDecodeError):
         estudiantes = []
 
-    # Agregar el nuevo estudiante a la lista
-    estudiantes.append(estudiante)
+    estudiante = {}
+    
+    while True:
+        mostrar_menu_registro_estudiantes()
+        opcion = input("Seleccione una opción: ")
 
-    # Asegúrate de que la carpeta existe antes de guardar
-    os.makedirs("proyecto/data", exist_ok=True)
+        if opcion == "1":
+            while True:
+                try:
+                    codigo = int(input("---> Ingrese el código del estudiante: "))
+                    if codigo <= 0:
+                        print("El código debe ser un número positivo.")
+                    else:
+                        estudiante['codigo'] = codigo
+                        break  # Si es un número positivo, salimos del bucle
+                except ValueError:
+                    print(">>> Error. Por favor, ingrese un número válido para el código.")
+                    input("Presione enter para volver a intentar. . . ")
+        
+        elif opcion == "2":
+            while True:
+                nombre = input("---> Ingrese el nombre del estudiante: ").strip()
+                if any(char.isdigit() for char in nombre):
+                    print(">>> Error. El nombre no puede contener números.")
+                elif not nombre:
+                    print(">>> Error. El nombre no puede estar vacío.")
+                else:
+                    estudiante['nombre'] = nombre
+                    break
 
-    # Guardar la lista de estudiantes en el archivo
-    try:
-        with open("data/estudiantes.json", "w") as archivo:
-            json.dump(estudiantes, archivo, indent=4)
-        print("\nEstudiante registrado correctamente.")
-    except Exception as e:
-        print(f"Error al guardar los datos: {e}")
+        elif opcion == "3":
+            while True:
+                sexo = input("---> Ingrese el género del estudiante (M/F): ").strip().lower()
+                if sexo in ["m", "f"]:
+                    estudiante['sexo'] = sexo
+                    break
+                else:
+                    print(">>> Error. Por favor, ingrese 'M' o 'F'.")
+
+        elif opcion == "4":
+            while True:
+                try:
+                    edad = int(input("---> Ingrese la edad del estudiante: "))
+                    if edad <= 0:
+                        print("La edad debe ser un número positivo.")
+                    else:
+                        estudiante['edad'] = edad
+                        break
+                except ValueError:
+                    print(">>> Error. Por favor, ingrese un número válido para la edad.")
+
+        elif opcion == "5":
+            if all(key in estudiante for key in ['codigo', 'nombre', 'sexo', 'edad']):
+                estudiantes.append(estudiante)
+                # Asegúrate de que la carpeta existe antes de guardar
+                os.makedirs("data", exist_ok=True)
+
+                # Guardar la lista de estudiantes en el archivo
+                try:
+                    with open("data/estudiantes.json", "w") as archivo:
+                        json.dump(estudiantes, archivo, indent=4)
+                    print("\n✅ Estudiante registrado correctamente.")
+                    input("Presione Enter para continuar...")
+                except Exception as e:
+                    print(f"⚠️ Error al guardar los datos: {e}")
+            else:
+                print(">>> ❌ Error. Debe completar todos los campos antes de guardar.")
+
+        elif opcion == "6":
+            print("👋 Volviendo al menú principal...")
+            break
+
+        else:
+            print(">>> ❌ Opción no válida. Intente de nuevo.")
+
+# Para probar la función (descomentar si se necesita)
+# registrar_estudiante()
