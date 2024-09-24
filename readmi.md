@@ -9,7 +9,9 @@ Estructura del código:
 ![alt text](image-3.png)
 
 1.1 Definición de la Función:
+
 ![alt text](image-9.png)
+
 Se define una función llamada cargar_contraseña que no toma argumentos.
 
 1.2 Intento de Abrir el Archivo:
@@ -25,6 +27,26 @@ Se define una función llamada cargar_contraseña que no toma argumentos.
 1.4 Retorno de la contraseña:
 ![alt text](image-12.png)
 * Retorna el valor asociado con la clave "contraseña" en el diccionario datos. Este es el valor de la contraseña que fue previamente guardada.
+
+1.5 Manejo de excepciones:
+![alt text](image-13.png)
+* FileNotFoundError: Si el archivo contraseña.json no existe.
+*json.JSONDecodeError: Si el archivo no se puede decodificar como JSON (por ejemplo, si esta vacio o tiene un formato incorrecto).
+
+1.6 Creacion de la carpeta:
+![alt text](image-14.png)
+* Si se produce una excepcion, se asegura de que la carpeta data exista. La opcion exist_ok=True evita un error si la carpeta ya existe.
+
+1.7 Guardar la contraseña predeterminada:
+![alt text](image-15.png)
+*Llama a la funcion guardar_contraseña y le pasa la cadena "SISGESA" como contraseña predeterminada. Esto crea el archivo con una contraseña inicial si no existe.
+
+1.8 Cargar de nuevo la contraseña:
+![alt text](image-16.png)
+*Luego, la funcion llama a si misma para intentar cargar la contraseña nuevamente. Esto se hace para retornar la nueva contraseña que se acaba de guardar.
+
+La función cargar_contraseña() es esencial para gestionar el almacenamiento y recuperación de la contraseña del sistema. Proporciona una forma robusta de asegurar que siempre haya una contraseña disponible, creando y guardando una si es necesario. Esto mejora la experiencia del usuario, ya que no tienen que preocuparse por la falta de configuración inicial.
+
 
 2. Solicitar al usuario ingresar su nombre y contraseña.
 ![alt text](image-5.png)
