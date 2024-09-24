@@ -10,7 +10,7 @@ def mostrar_menu_registro():
     print("2. Ingresar Nombre del Grupo")
     print("3. Ingresar Sigla del Grupo")
     print("4. Guardar Grupo")
-    print("5. Agregar Estudiante a un Grupo")
+    print("5. Asignar Estudiante a un Grupo y Módulos")
     print("6. Volver al Menú Principal")
     print("=" * 40)
 
@@ -67,7 +67,7 @@ def registrar_grupo():
             else:
                 print(">>> ❌ Error. Debe completar todos los campos antes de guardar.")
         elif opcion == "5":
-            agregar_estudiante_a_grupo(grupos)
+            asignar_estudiante_a_grupo_y_modulos(grupos)
         elif opcion == "6":
             print("👋 Volviendo al menú principal...")
             break
@@ -76,7 +76,7 @@ def registrar_grupo():
 
         mostrar_menu_registro()
 
-def agregar_estudiante_a_grupo(grupos):
+def asignar_estudiante_a_grupo_y_modulos(grupos):
     # Cargar estudiantes existentes
     try:
         with open("data/estudiantes.json", "r") as archivo:
@@ -123,16 +123,28 @@ def agregar_estudiante_a_grupo(grupos):
         input("Presione Enter para continuar...")
         return
 
-    # Agregar estudiante al grupo
+    # Asignar el estudiante al grupo
     if 'estudiantes' not in grupo_seleccionado:
         grupo_seleccionado['estudiantes'] = []  # Inicializa la lista si no existe
     grupo_seleccionado['estudiantes'].append(estudiante_seleccionado)
-    
+
+    # Asignar módulos al estudiante
+    modulos = []
+    while len(modulos) < 3:
+        modulo = input(f"Ingrese el código del módulo {len(modulos) + 1} (o presione Enter para finalizar): ").strip()
+        if modulo:
+            modulos.append(modulo)
+        else:
+            break  # Salir del bucle si no se ingresa un módulo
+
+    # Guardar módulos en el estudiante
+    estudiante_seleccionado['modulos'] = modulos
+
     # Guardar grupos actualizados
     try:
         with open("data/grupos.json", "w") as archivo:
             json.dump(grupos, archivo, indent=4)
-        print("✅ Estudiante agregado al grupo correctamente.")
+        print("✅ Estudiante agregado al grupo y módulos correctamente.")
         input("Presione Enter para continuar...")
     except Exception as e:
         print(f">>> ⚠️ Error al guardar el grupo: {e}")
