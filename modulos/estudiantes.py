@@ -3,10 +3,11 @@ import os
 
 def registrar_estudiante():
     print('\033c')
-    # Solicitar datos del estudiante
+    print("="*40)
+    print("      --- Registro de Estudiante ---      ")
+    print("="*40)
 
-    #Validacion de nombre
-    
+#Validacion de codigo
     while True:
         try:
             print('\033c')
@@ -20,7 +21,7 @@ def registrar_estudiante():
             print(">>> Error. Por favor, ingrese un número válido para el código.")
             input("Presione enter para volver a intentar. . . ")
             print('\033')
-
+#Validacion de nombre
     while True:
         try:
             print('\033c')
@@ -34,34 +35,32 @@ def registrar_estudiante():
             print(">>> Error. Por favor, ingrese un nombre válido.")
             input("Presione enter para volver a intentar. . . ")
             print('\033')
-
+#Validacion de genero
     while True:
-        try:
-            print('\033c')
-            sexo = str(input("---> Ingrese el genero del estudiante (M/F): "))
-            if nombre == "M" or nombre == "m" or nombre == "F" or nombre == "f":
-                print("")
-            else:
-                break  # Si el genero esta bien, salimos del bucle
-        except ValueError:
+        print('\033c')
+        sexo = str(input("---> Ingrese el genero del estudiante (M/F): ")).strip().lower()
+        if sexo in ["m", "f"]:
+            break
+        else:
             print('\033c')  # Limpia la consola
-            print(">>> Error. Por favor, ingrese un genero válido.")
+            print(">>> Error. Por favor, ingrese 'M' o 'F'.")
             input("Presione enter para volver a intentar. . . ")
             print('\033')
 
-    #Validacion de edad
+#Validacion de edad
     while True:
         try:
             edad = int(input("---> Ingrese la edad del estudiante: "))
             if edad <= 0:
                 print("La edad debe ser un número positivo.")
-                continue
-            break
+            else:
+                break
         except ValueError:
+            print(">>> Error. Por favor, ingrese un número válido para la edad.")
             print("Por favor, ingrese un número válido para la edad.")
 
 
-    # Crear el diccionario del estudiante
+# Crear el diccionario del estudiante
     estudiante = {
             "codigo": codigo,
             "nombre": nombre,
@@ -86,6 +85,6 @@ def registrar_estudiante():
     try:
         with open("data/estudiantes.json", "w") as archivo:
             json.dump(estudiantes, archivo, indent=4)
-        print("Estudiante registrado correctamente.")
+        print("\nEstudiante registrado correctamente.")
     except Exception as e:
         print(f"Error al guardar los datos: {e}")

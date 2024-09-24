@@ -11,7 +11,7 @@ def iniciar_sesion():
     os.system('clear' if os.name != 'nt' else 'cls')
     print("=======================================")
     print("           INICIO DE SESIÓN           ")
-    print("=======================================")   
+    print("=======================================")
 
 
     usuario = input("Ingrese su usuario: ")
