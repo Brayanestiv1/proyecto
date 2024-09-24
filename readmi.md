@@ -42,7 +42,7 @@ Salida del sistema.
 
 
    3. Registro de Grupos: El sistema debe permitir registrar grupos de estudiantes. Cada grupo debe estar identificado por un código, un nombre y una sigla. 
-
+![alt text](image.png)
 
 
      4. Registro de Módulos: La institución ofrece varios módulos. El sistema debe registrar la información de cada módulo, que incluye su código, nombre y duración en semanas. 
