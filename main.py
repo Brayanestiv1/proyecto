@@ -7,19 +7,19 @@ def main():
         opcion = input(">>> Seleccione una opción:? ")
             
         if opcion == "1":
-            modulos.registrar_grupos()
+            registro_grupos.registrar_grupo()
         elif opcion == "2":
             modulos.registrar_modulo()
         elif opcion == "3":
             estudiantes.registrar_estudiante()
         elif opcion == "4":
-            docentes()
+            docentes.registrar_docente()
         elif opcion == "5":
-            asig_estudiante_grup_modul()
+            asig_estudiante_grup_modul.asignar_estudiantes()
         elif opcion == "6":
             asistencia()
         elif opcion == "7":
-            consultas_generacion_informes()
+            consultas_generacion_informes.consultar_estudiantes_por_grupo()
         elif opcion == "8":
             consultas_generacion_informes()
         elif opcion == "9":
