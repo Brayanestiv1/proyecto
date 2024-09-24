@@ -28,5 +28,17 @@
         "nombre": "123",
         "sexo": "m",
         "edad": 15
+    },
+    {
+        "codigo": 123,
+        "nombre": "12",
+        "sexo": "f",
+        "edad": 15
+    },
+    {
+        "codigo": 123,
+        "nombre": "123",
+        "sexo": "m",
+        "edad": 18
     }
 ]

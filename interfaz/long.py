@@ -1,32 +1,42 @@
 import hashlib
 import json
 import os
-from . import menu # Importacion relativa
+from . import menu  # Importación relativa
 # Función para encriptar la contraseña
 def encriptar_contraseña(contraseña):
     return hashlib.sha256(contraseña.encode()).hexdigest()
 
 # Función de inicio de sesión
 def iniciar_sesion():
-    os.system('clear' if os.name != 'nt' else 'cls')
-    print("=======================================")
-    print("           INICIO DE SESIÓN           ")
-    print("=======================================")
+    while True:  # Permitir múltiples intentos hasta que se logre el inicio de sesión
+        os.system('clear' if os.name != 'nt' else 'cls')
+        print("="*60)
+        print("            📚 INICIO DE SESIÓN 📚            ")
+        print("="*60)
 
+        usuario = input("Ingrese su usuario: ").strip()
 
-    usuario = input("Ingrese su usuario: ")
-    while True:
-        contraseña_guardada = cargar_contraseña()
-        contraseña = input("Ingrese la contraseña: ")
+        # Validar que el nombre no contenga números
+        if any(char.isdigit() for char in usuario):
+            print(">>> ❌ Error. El nombre de usuario no puede contener números.")
+            input("Presione enter para intentar de nuevo...")
+            continue  # Volver a solicitar el nombre de usuario
 
-        if encriptar_contraseña(contraseña) == contraseña_guardada:
-            print("\nAcceso concedido\n")
-            break
-        else:
-            os.system("clear")
-            print(">>> Error. Contraseña incorrecta")
-            input("Presione enter para continuar. . .")
-            os.system("clear")
+        while True:
+            contraseña_guardada = cargar_contraseña()
+            contraseña = input("Ingrese la contraseña: ").strip()
+            error_msg = ""
+
+            if encriptar_contraseña(contraseña) == contraseña_guardada:
+                print("\n  🎓 Acceso concedido. Bienvenido, {}! 🎓\n".format(usuario))
+                input("Presione enter para ir al menu principal. . .")
+                os.system("clear")  # Limpiar la consola después de ingresar
+                return  # Salir de la función para mostrar el menú
+            else:
+                error_msg = ">>> ❌ Error. Contraseña incorrecta."
+                print("\r" + " " * len(error_msg) + "\r", end="")  # Limpiar mensaje anterior
+                print(error_msg)  # Imprimir mensaje de error
+                input("Presione enter para intentar de nuevo...")
 
 # Función para cargar la contraseña del archivo JSON
 def cargar_contraseña():
@@ -48,8 +58,7 @@ def guardar_contraseña(contraseña):
         with open("data/contraseña.json", "w") as archivo:
             json.dump({"contraseña": encriptar_contraseña(contraseña)}, archivo)
     except Exception as e:
-        print(f">>> Error al guardar la contraseña: {e}")
-
+        print(f">>> ⚠️ Error al guardar la contraseña: {e}")
 
 # Limpiar la consola antes de iniciar sesión
 os.system("clear")
@@ -59,4 +68,4 @@ iniciar_sesion()
 
 # Mostrar el menú después de un inicio de sesión exitoso
 os.system("clear")
-menu.mostrar_menu  # Asegúrate de que la función menu() esté definida en 'interfaz'
+menu.mostrar_menu()  # Llama a la función mostrar_menu() de 'menu'

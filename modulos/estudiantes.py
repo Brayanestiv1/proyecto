@@ -25,7 +25,7 @@ def registrar_estudiante():
     while True:
         try:
             print('\033c')
-            nombre = str(input("---> Ingrese el código del estudiante: "))
+            nombre = str(input("---> Ingrese el nombre del estudiante: "))
             if nombre == int:
                 print("El nombre no puede contener numeros.")
             else:

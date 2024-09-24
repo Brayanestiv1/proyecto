@@ -9,9 +9,12 @@ def registrar_docente():
         'nombre': nombre
     }
 
+
+
     # Intentar cargar los docentes existentes
+
     try:
-        with open('data/docentes.json', 'r') as archivo:
+        with open("data/docentes.json", "r") as archivo:
             docentes = json.load(archivo)
     except FileNotFoundError:
         docentes = []
@@ -20,7 +23,10 @@ def registrar_docente():
     docentes.append(docente)
 
     # Guardar la lista de docentes en el archivo
-    with open('data/docentes.json', 'w') as archivo:
-        json.dump(docentes, archivo, indent=4)
-    print("Docente registrado correctamente.")
+    try:
+        with open("data/docentes.json", "w") as archivo:
+            json.dump(docentes, archivo, indent=4)
+            print("Docente registrado correctamente.")
+    except Exception as e:
+        print(f"Error al guardar los datos: {e}")
 

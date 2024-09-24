@@ -25,7 +25,7 @@ def registrar_modulo():
 
     # Guardar la lista de módulos actualizada en el archivo
     try:
-        with open('proyecto/data/modulos.json', 'w') as archivo:
+        with open("data/modulos.json", "w") as archivo:
             json.dump(modulos, archivo, indent=4)  # Formato JSON con indentación
         print("Módulo registrado correctamente.")
     except (FileNotFoundError, json.JSONDecodeError):
@@ -35,7 +35,7 @@ def registrar_modulo():
 
 def listar_modulos():
     try:
-        with open('data/modulos.json', 'r') as archivo:
+        with open("data/modulos.json", "r") as archivo:
             modulos = json.load(archivo)
             if not modulos:
                 print("No hay módulos registrados.")

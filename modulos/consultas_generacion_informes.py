@@ -1,3 +1,5 @@
+import json
+import os
 def consultar_estudiantes_por_grupo():
     codigo_grupo = input("Ingrese el código del grupo: ")
     
