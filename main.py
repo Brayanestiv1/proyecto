@@ -15,7 +15,7 @@ def main():
         elif opcion == "4":
             docentes.registrar_docente()
         elif opcion == "5":
-            asistencia()
+            asistencia.registrar_asistencia()
         elif opcion == "6":
             consultas_generacion_informes.consultar_estudiantes_por_grupo()
         elif opcion == "7":

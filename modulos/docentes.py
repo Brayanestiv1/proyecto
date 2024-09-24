@@ -83,7 +83,7 @@ def registrar_docente():
             break
 
         elif opcion == "7":
-            listar_docentes()  # Llamar a listar_docentes sin pasar la lista
+            listar_docentes()
 
         else:
             print(">>> ❌ Opción no válida. Intente de nuevo.")
@@ -123,4 +123,3 @@ def listar_docentes():
 
 # Para probar la función (descomentar si se necesita)
 # registrar_docente()
-

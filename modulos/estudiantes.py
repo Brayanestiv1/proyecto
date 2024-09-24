@@ -33,12 +33,12 @@ def registrar_estudiante():
         if opcion == "1":
             while True:
                 try:
-                    codigo = int(input("---> Ingrese el código del estudiante: "))
-                    if codigo <= 0:
+                    codigo = input("---> Ingrese el código del estudiante: ").strip()
+                    if not codigo.isdigit() or int(codigo) <= 0:
                         print("El código debe ser un número positivo.")
                     else:
-                        estudiante['codigo'] = codigo
-                        break  # Si es un número positivo, salimos del bucle
+                        estudiante["codigo"] = codigo # Guardar como cadena
+                        break  # Si es un dato valido, salimos del bucle
                 except ValueError:
                     print(">>> Error. Por favor, ingrese un número válido para el código.")
                     input("Presione enter para volver a intentar. . . ")

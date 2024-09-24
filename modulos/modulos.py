@@ -31,7 +31,7 @@ def registrar_modulo():
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            modulo['codigo'] = int(input("Ingrese el código del módulo: "))
+            modulo["codigo"] = (input("Ingrese el código del módulo: "))
         elif opcion == "2":
             nombre = input("Ingrese el nombre del módulo: ").strip()
             if nombre:
