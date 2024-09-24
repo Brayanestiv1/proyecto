@@ -1,5 +1,6 @@
 import os
 import json
+import string
 
 def mostrar_menu_registro():
     os.system('clear' if os.name != 'nt' else 'cls')
@@ -14,12 +15,17 @@ def mostrar_menu_registro():
     print("6. Volver al Menú Principal")
     print("=" * 40)
 
+def es_valido(valor):
+    """Verifica que el valor no contenga solo signos de puntuación."""
+    return any(char.isalnum() for char in valor)
+
 def obtener_codigo_unico(grupos):
-    codigo = input("Ingrese el código del grupo: ").strip()
-    if any(grupo['codigo'] == codigo for grupo in grupos):
-        print(">>> ❌ Error. El código ya existe. Intente de nuevo.")
-        return obtener_codigo_unico(grupos)
-    return codigo
+    while True:
+        codigo = input("Ingrese el código del grupo: ").strip()
+        if any(grupo['codigo'] == codigo for grupo in grupos):
+            print(">>> ❌ Error. El código ya existe. Intente de nuevo.")
+        else:
+            return codigo
 
 def registrar_grupo():
     grupos = []
@@ -31,39 +37,40 @@ def registrar_grupo():
     except (FileNotFoundError, json.JSONDecodeError):
         grupos = []
 
-    grupo = {}
-    mostrar_menu_registro()
-
     while True:
+        mostrar_menu_registro()
+        grupo = {}  # Inicializar el grupo aquí
+
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
             grupo['codigo'] = obtener_codigo_unico(grupos)
         elif opcion == "2":
             nombre = input("Ingrese el nombre del grupo: ").strip()
-            if nombre:
+            if es_valido(nombre):
                 grupo['nombre'] = nombre
             else:
-                print(">>> ❌ Error. El nombre no puede estar vacío.")
+                print(">>> ❌ Error. El nombre no puede estar vacío o contener solo signos de puntuación.")
+                continue  # Volver a preguntar
         elif opcion == "3":
             sigla = input("Ingrese la sigla del grupo: ").strip()
-            if sigla:
+            if es_valido(sigla):
                 grupo['sigla'] = sigla
             else:
-                print(">>> ❌ Error. La sigla no puede estar vacía.")
+                print(">>> ❌ Error. La sigla no puede estar vacía o contener solo signos de puntuación.")
+                continue  # Volver a preguntar
         elif opcion == "4":
             if all(key in grupo for key in ['codigo', 'nombre', 'sigla']):
                 grupos.append(grupo)
-                # Guardar grupos en el archivo
                 try:
                     os.makedirs("data", exist_ok=True)
                     with open("data/grupos.json", "w") as archivo:
                         json.dump(grupos, archivo, indent=4)
                     print("✅ Grupo registrado correctamente.")
                     input("Presione Enter para continuar...")
+                    continue  # Reiniciar el ciclo
                 except Exception as e:
                     print(f">>> ⚠️ Error al guardar el grupo: {e}")
-                continue
             else:
                 print(">>> ❌ Error. Debe completar todos los campos antes de guardar.")
         elif opcion == "5":
@@ -74,28 +81,22 @@ def registrar_grupo():
         else:
             print(">>> ❌ Opción no válida. Intente de nuevo.")
 
-        mostrar_menu_registro()
-
 def asignar_estudiante_a_grupo_y_modulos(grupos):
-    # Cargar estudiantes existentes
     try:
         with open("data/estudiantes.json", "r") as archivo:
             estudiantes = json.load(archivo)
     except (FileNotFoundError, json.JSONDecodeError):
         estudiantes = []
 
-    # Verificar si hay grupos disponibles
     if not grupos:
         print(">>> ❌ No hay grupos registrados.")
         input("Presione Enter para continuar...")
         return
 
-    # Mostrar grupos disponibles
     print("Grupos disponibles:")
     for grupo in grupos:
         print(f"Código: {grupo['codigo']}, Nombre: {grupo['nombre']}")
 
-    # Seleccionar grupo
     codigo_grupo = input("Ingrese el código del grupo al que desea agregar un estudiante: ").strip()
     grupo_seleccionado = next((g for g in grupos if g['codigo'] == codigo_grupo), None)
 
@@ -104,7 +105,6 @@ def asignar_estudiante_a_grupo_y_modulos(grupos):
         input("Presione Enter para continuar...")
         return
 
-    # Mostrar estudiantes disponibles
     if not estudiantes:
         print(">>> ❌ No hay estudiantes registrados.")
         input("Presione Enter para continuar...")
@@ -114,7 +114,6 @@ def asignar_estudiante_a_grupo_y_modulos(grupos):
     for estudiante in estudiantes:
         print(f"Código: {estudiante['codigo']}, Nombre: {estudiante['nombre']}")
 
-    # Seleccionar estudiante
     codigo_estudiante = input("Ingrese el código del estudiante a agregar: ").strip()
     estudiante_seleccionado = next((e for e in estudiantes if e['codigo'] == codigo_estudiante), None)
 
@@ -123,24 +122,20 @@ def asignar_estudiante_a_grupo_y_modulos(grupos):
         input("Presione Enter para continuar...")
         return
 
-    # Asignar el estudiante al grupo
     if 'estudiantes' not in grupo_seleccionado:
-        grupo_seleccionado['estudiantes'] = []  # Inicializa la lista si no existe
+        grupo_seleccionado['estudiantes'] = []
     grupo_seleccionado['estudiantes'].append(estudiante_seleccionado)
 
-    # Asignar módulos al estudiante
     modulos = []
     while len(modulos) < 3:
         modulo = input(f"Ingrese el código del módulo {len(modulos) + 1} (o presione Enter para finalizar): ").strip()
         if modulo:
             modulos.append(modulo)
         else:
-            break  # Salir del bucle si no se ingresa un módulo
+            break
 
-    # Guardar módulos en el estudiante
     estudiante_seleccionado['modulos'] = modulos
 
-    # Guardar grupos actualizados
     try:
         with open("data/grupos.json", "w") as archivo:
             json.dump(grupos, archivo, indent=4)

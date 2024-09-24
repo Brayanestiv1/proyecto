@@ -3,5 +3,10 @@
         "codigo": "G001",
         "nombre": "GRUPO A",
         "sigla": "A"
+    },
+    {
+        "codigo": "G002",
+        "nombre": "GRUPO B",
+        "sigla": "B"
     }
 ]
