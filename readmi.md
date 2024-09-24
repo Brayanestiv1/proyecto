@@ -22,27 +22,28 @@ Se solicita el desarrollo de un programa para la consola o terminal y escrito en
 
 	1. Inicio de Sesión: 
 
-Al iniciar el programa, debe solicitarse un nombre de usuario y contraseña. La primera vez que el sistema sea ejecutado, la contraseña será la predefinida: "SISGESA". 
-El sistema debe permitir cambiar esta contraseña a través de una opción en el menú. 
-La contraseña debe ser guardada en un archivo y asegurada mediante algoritmos de encriptación nativos de Python, como SHA-256, sin la necesidad de instalar módulos adicionales. 
+El sistema deberá iniciar solicitando el nombre de usuario y contraseña. La primera vez que se ejecute, la contraseña predeterminada será "SISGESA". Utilizaremos el algoritmo SHA-256 para encriptar la contraseña y almacenarla en un archivo JSON.
 
+Estructura del código:
 
-	2. Menú de Opciones: 
+1. Cargar la contraseña encriptada de un archivo JSON.
+![alt text](image-1.png)
+![alt text](image-3.png)
 
-El programa debe presentar un menú con opciones claras para interactuar con el sistema. Las opciones del menú deben incluir: 
-Registro de grupos. 
-Registro de módulos. 
-Registro de estudiantes. 
-Registro de docentes. 
-Registro de asistencia. 
-Consultas de información. 
-Generación de informes. 
-Cambio de contraseña. 
-Salida del sistema. 
+2. Solicitar al usuario ingresar su nombre y contraseña.
+![alt text](image-5.png)
+3. Comparar la contraseña ingresada con la almacenada (encriptada con SHA-256).
+![alt text](image-6.png)
+
+	2. Menú Principal:
+
+Una vez que el usuario ha iniciado sesión, debe tener acceso al menú principal del sistema. Este menú ofrecerá las opciones de gestión de asistencia: registrar grupos, módulos, estudiantes, docentes, consultas, informes, cambio de contraseña, etc.
+![alt text](image-7.png)
+![alt text](image-8.png)
+El menú principal permite al usuario interactuar con el sistema de manera estructurada, facilitando diversas acciones relacionadas con la gestión educativa. A través de opciones numeradas, los usuarios pueden acceder a funciones específicas, y el programa maneja entradas inválidas para mejorar la experiencia del usuario.
 
 
    3. Registro de Grupos: El sistema debe permitir registrar grupos de estudiantes. Cada grupo debe estar identificado por un código, un nombre y una sigla. 
-![alt text](image.png)
 
 
      4. Registro de Módulos: La institución ofrece varios módulos. El sistema debe registrar la información de cada módulo, que incluye su código, nombre y duración en semanas. 
